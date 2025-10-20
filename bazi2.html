@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بازی حدس عدد</title>
+    <link rel="stylesheet" href="C:\Users\Arad\Desktop\HTML Projects\css\bazi2.css">
+</head>
+
+
+<br> <br> <br> <br> <br>
+
+
+<body>
+
+    <div class="container" dir="rtl">
+
+        <h1>بازی حدس عدد (1 تا 100)</h1>
+        <p>من یک عدد بین ۱ تا ۱۰۰ در نظر گرفته‌ام. سعی کن آن را حدس بزنی!</p>
+        
+        <input type="number" id="guessInput" placeholder="عدد خود را وارد کنید" min="1" max="100">
+        <button id="guessButton">حدس بزن</button>
+        <button id="restartButton">↻</button>
+        
+        <div id="message"></div>
+        <div id="attempts">تعداد تلاش: 0</div>
+        
+    </div>
+
+
+
+    <script>
+        // متغیرهای بازی
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        let gameOver = false;
+        
+        // عناصر DOM
+        const guessInput = document.getElementById('guessInput');
+        const guessButton = document.getElementById('guessButton');
+        const restartButton = document.getElementById('restartButton');
+        const message = document.getElementById('message');
+        const attemptsDisplay = document.getElementById('attempts');
+        
+        // بررسی حدس کاربر
+        function checkGuess() {
+            if (gameOver) return;
+            
+            const userGuess = parseInt(guessInput.value);
+            
+            // بررسی معتبر بودن ورودی
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                message.textContent = "لطفاً یک عدد معتبر بین ۱ تا ۱۰۰ وارد کنید!";
+                return;
+            }
+            
+            attempts++;
+            attemptsDisplay.textContent = "تعداد حدس‌ها: " + attempts;
+            
+            
+            // بررسی حدس
+            if (userGuess === secretNumber) {
+                message.textContent = "تبریک! شما عدد " + secretNumber + " را در " + attempts + " حدس پیدا کردید!";
+                historyItem.innerHTML = attempts + ". " + userGuess + " - درست!";
+                gameOver = true;
+                guessInput.disabled = true;
+                guessButton.disabled = true;
+            } else if (userGuess < secretNumber) {
+                message.textContent = "عدد شما کوچک‌تر از عدد من است.";
+                historyItem.innerHTML = attempts + ". " + userGuess + " - کوچک‌تر";
+            } else {
+                message.textContent = "عدد شما بزرگ‌تر از عدد من است.";
+                historyItem.innerHTML = attempts + ". " + userGuess + " - بزرگ‌تر";
+            }
+            
+        
+            
+            // پاک کردن فیلد ورودی
+            guessInput.value = "";
+            guessInput.focus();
+        }
+        
+        // شروع مجدد بازی
+        function restartGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            gameOver = false;
+            
+            message.textContent = "";
+            attemptsDisplay.textContent = "تعداد حدس‌ها: ۰";
+            historyList.innerHTML = "";
+            
+            guessInput.value = "";
+            guessInput.disabled = false;
+            guessButton.disabled = false;
+            guessInput.focus();
+        }
+        
+        // رویداد کلیک دکمه حدس
+        guessButton.addEventListener('click', checkGuess);
+        
+        // رویداد کلیک دکمه شروع مجدد
+        restartButton.addEventListener('click', restartGame);
+        
+        // امکان استفاده از کلید Enter برای حدس زدن
+        guessInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                checkGuess();
+            }
+        });
+        
+        // تنظیم پیام اولیه
+        message.textContent = "یک عدد بین ۱ تا ۱۰۰ حدس بزن!";
+        guessInput.focus();
+    </script>
+
+
+
+
+</body>
+
+
+
+</html>

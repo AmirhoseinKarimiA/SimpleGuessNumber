@@ -1,0 +1,60 @@
+body {
+    font-family: bnazanin, sans-serif;
+    text-align: right;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#restartButton {
+    background-color: #f0f0f0;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#restartButton:hover {
+    background-color: #cecece;
+}
+
+#guessButton:hover{
+
+    background-color: rgb(125, 97, 201);
+}
+
+#guessButton{
+    background-color: #6a4caf;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+#message {
+    margin: 20px 0;
+    font-weight: bold;
+    min-height: 30px;
+}
+input{
+    width: 350px;
+    outline-style: none;
+    border: 2px solid rgb(106, 62, 146);
+    font-weight: bold;
+}
